@@ -21,19 +21,28 @@ def mergeFiles(file1,file2):
             titles.append(line)
     
     uniqueTitle=np.unique(titles)
-    count=0
+    export(file1,uniqueTitle)
+    
+def readLst(directory,exportFile):
+    # TODO:implement function for extracting codes from hts_cache/*.lst files
+    pass
 
+def export(file,titleList):
+    count=0
     with open(file1,'w') as f1:
         for title in uniqueTitle:
             if title.startswith("tt"):
                 count+=1
                 f1.write(title)
 
-    print count,"titles written"
+    print count,"titles written in", file
 
 if __name__ == '__main__':
-    if(sys.argv>2):
-        mergeFiles(sys.argv[1],sys.argv[2])
-    else:
-        files=fileWalker(sys.argv[1])
+    if(sys.argv[1]=="-m"):
+        mergeFiles(sys.argv[2],sys.argv[3])
+    elif (sys.argv[1]=="-d"):
+        files=fileWalker(sys.argv[2])
         print files
+    elif (sys.argv[1]=="-l"):
+        readLst(sys.argv[2],sys.argv[3])
+        
