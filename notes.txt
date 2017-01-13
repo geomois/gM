@@ -1,0 +1,4 @@
+httrack -s0 -p0C0I0t http://www.imdb.com/chart/top +http://www.imdb.com/title/*
+httrack -s0 -p0C0I0t http://www.imdb.com/chart/toptv/ +http://www.imdb.com/title/*
+
+
