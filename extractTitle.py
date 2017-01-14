@@ -2,13 +2,14 @@ import os
 import sys
 import numpy as np
 
-def fileWalker(directory):
+def fileWalker(directory,file):
     filesToScrape=[]
     for subdir, dirs, files in os.walk(directory):
         for d in dirs:
             filesToScrape.append(d)
 
-    return filesToScrape
+    uniqueTitle=np.unique(filesToScrape)
+    export(file,uniqueTitle)
 
 def mergeFiles(file1,file2):
     titles=[]
@@ -25,17 +26,34 @@ def mergeFiles(file1,file2):
     
 def readLst(directory,exportFile):
     # TODO:implement function for extracting codes from hts_cache/*.lst files
-    pass
+    titles=[]
+    for subdir, dirs, files in os.walk(directory):
+        for f in files:
+            if f.endswith(".lst"):
+                filename=os.path.join(directory,f)
+                with open(filename,'r') as listFile:
+                    for line in listFile:
+                        fooArray=line.split("/")
+                        if fooArray[1]=="title":
+                            titles.append(fooArray[2][:9])
+    
+    uniqueTitle=np.unique(titles)
+    export(exportFile,uniqueTitle)
 
-def export(file,titleList):
+
+def export(exportFile,titleList):
     count=0
-    with open(file1,'w') as f1:
-        for title in uniqueTitle:
+    if not os.path.isfile(exportFile):
+        f=open(exportFile,"w+")
+        f.close()
+
+    with open(exportFile,'a+') as f:
+        for title in titleList:
             if title.startswith("tt"):
                 count+=1
-                f1.write(title)
+                f.write(title.rstrip()+'\n')
 
-    print count,"titles written in", file
+    print count,"titles written in", exportFile
 
 if __name__ == '__main__':
     if(sys.argv[1]=="-m"):
