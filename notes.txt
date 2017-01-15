@@ -1,4 +1,8 @@
 httrack -s0 -p0C0I0t http://www.imdb.com/chart/top +http://www.imdb.com/title/*
+httrack -s0 -p0 -#L100000000 http://www.imdb.com/chart/top +http://www.imdb.com/title/* +http://www.imdb.com/company/* +http://www.imdb.com/name/*
+
+httrack -s0 -p0 -#L100000000 http://www.imdb.com/list/ls000522427 +http://www.imdb.com/title/* +http://www.imdb.com/company/* +http://www.imdb.com/name/*
+
 httrack -s0 -p0C0I0t http://www.imdb.com/chart/toptv +http://www.imdb.com/title/*
 
 

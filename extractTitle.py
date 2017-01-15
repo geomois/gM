@@ -1,6 +1,7 @@
 import os
 import sys
 import numpy as np
+import imdb
 
 def fileWalker(directory,file):
     filesToScrape=[]
@@ -47,13 +48,20 @@ def export(exportFile,titleList):
         f=open(exportFile,"w+")
         f.close()
 
-    with open(exportFile,'a+') as f:
+    with open(exportFile,'w+') as f:
         for title in titleList:
             if title.startswith("tt"):
                 count+=1
                 f.write(title.rstrip()+'\n')
 
     print count,"titles written in", exportFile
+
+def fetchMovieInfo(titleList):
+    # im=imdb.IMDb()
+    # result=im.get_movie(titleCode)
+    # ####im.update(result)
+    # result.data
+    pass
 
 if __name__ == '__main__':
     if(sys.argv[1]=="-m"):
