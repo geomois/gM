@@ -1,0 +1,20 @@
+
+
+
+
+.d:before {
+    content: "\A";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid black;
+    left: 6px;
+    top: -9px;
+}
+
+.d {
+    margin-top: 0.5em;
+    display: inline-block;
+    background: #dd4397;
+    position:relative;
+}
