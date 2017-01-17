@@ -55,10 +55,10 @@ def fetchMovieInfo(titleList,exportFile):
             if i>=titleList[len(titleList)-1]:
                 break
 
-        if (i+1)%1000==0:
-            print "Writing at "+str(i)
+        if (i+1)%5000==0:
+            print "Writing at ",str(titleList[i])
             movieList=cleanData(movieList)
-            exportJson(str(i+1)+".json",movieList)
+            exportJson(str(titleList[i])+".json",movieList)
             movieList=[]
 
     movieList=cleanData(movieList)
