@@ -1,9 +1,16 @@
+app.controller('OverviewCtrl',['$scope','CookieService', function($scope, CookieService){
+    $scope.team1 = CookieService.getCookies('team1');
+    $scope.team2 = CookieService.getCookies('team2');
+    var round = CookieService.getCookies('teamCount');
+    $scope.round = (isEven(round))?round:round-1;
+}]);
+
 app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService', function($scope, $timeout, CookieService) {
     $scope.counter = 120;
     $scope.count = '';
     $scope.ready = 'none';
     var teams = CookieService.getCookies('teamCount');
-    if (isEven(teams)) {
+    if (!isEven(teams)) {
         $scope.team = CookieService.getCookies('team1');
         var teamC = 'team1';
     } else {
@@ -57,7 +64,7 @@ app.controller('StartCtrl', ['$scope', 'CookieService', function($scope, CookieS
             score: 0,
             movies: []
         };
-        var teamCount = 1;
+        var teamCount = 0;
         CookieService.setCookies(team_1, team_2, teamCount);
         // CookieService.getCookies($cookies.team1);
     }
@@ -68,7 +75,7 @@ app.controller('GameCtrl', ['$timeout', '$scope', 'GetMovieData', 'CookieService
     function($timeout, $scope, GetMovieData, CookieService, GameService) {
 
         var teams = CookieService.getCookies('teamCount');
-        if (isEven(teams)) {
+        if (!isEven(teams)) {
             $scope.team = CookieService.getCookies('team1');
             var teamC = 'team1';
         } else {

@@ -10,15 +10,11 @@ app.config(function ($routeProvider) {
       controller: 'StartCtrl',
       templateUrl: 'templates/start.htm'
     })
-    .when('/overview', {
-      controller: 'StartCtrl',
-      templateUrl: 'templates/overview.htm'
-    })
     .when('/time',{
       controller: 'TimerCtrl',
       templateUrl: 'templates/timer.htm'
     })
-    .when('/overview'{
+    .when('/overview',{
       controller: 'OverviewCtrl',
       templateUrl: 'templates/overview.htm'
     })

@@ -1,5 +1,14 @@
-<form >
-        overview:<input type="text" name="team1" ng-model="team1"/><br>
-  
-      </form>
-     <a href="#game1" ><input type="button" value="next" /></a>
+<div ng-controller="OverviewCtrl">
+	<div>
+		<span>Team1:{{team1.name}}</span><span>{{team1.score}}</span>
+	</div>
+	<div>
+		<span>Team2:{{team2.name}}</span><span>{{team2.score}}</span>
+	</div>
+	<div>
+		round:{{round}}
+	</div>
+	<a href="#game" >
+     <button>Next Movie</button> 
+   </a>
+</div>
