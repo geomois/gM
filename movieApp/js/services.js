@@ -1,6 +1,6 @@
 app.service('GetMovieData', ['$http', function($http) {
     this.movieData = function(callbackFunc) {
-        $http.get('../../movieApp/data/movieData.json').
+        $http.get('../movieData/data/movieData.json').
         success(function(data) {
             var adata = angular.fromJson(data);
             var data = [];
@@ -9,7 +9,6 @@ app.service('GetMovieData', ['$http', function($http) {
             }
             // console.log(data); 
             callbackFunc(data);
-            return data;
             // or depends what you need testArr[0] = data.images;
         }).
         error(function(data) {
