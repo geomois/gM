@@ -44,8 +44,8 @@ app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
 ]);
 
 
-app.controller('StartCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData', 'CookieService',
-    function($timeout, $scope, $rootScope, GetMovieData, CookieService) {
+app.controller('StartCtrl', ['$timeout', '$scope', 'GetMovieData', 'CookieService',
+    function($timeout, $scope, GetMovieData, CookieService) {
         GetMovieData.movieData(function(dataResponse) {
             $scope.movies = dataResponse;
         })
@@ -55,11 +55,6 @@ app.controller('StartCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData',
             $scope.a = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0) // length-4
             $scope.b = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0)
             console.log($scope.a,$scope.b)
-            if($scope.a && $scope.b){
-                $rootScope.movies1 = arraySlice($scope.movies, $scope.a)
-                $rootScope.movies2 = arraySlice($scope.movies, $scope.b)
-                console.log($scope.a,$scope.b)
-            }
         }, 200)
 
         $scope.team1 = '';
@@ -88,16 +83,26 @@ app.controller('StartCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData',
 
 app.controller('GameCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData', 'CookieService', 'GameService',
     function($timeout, $scope, $rootScope, GetMovieData, CookieService, GameService) {
+        GetMovieData.movieData(function(dataResponse) {
+            $scope.movies = dataResponse;
+        })
+
 
         var teams = CookieService.getCookies('teamCount');
         if (isEven(teams)) {
             $scope.team = CookieService.getCookies('team1');
             var teamC = 'team1';
-            $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
+            $timeout(function() {
+                 $rootScope.movies1=arraySlice($scope.movies,$scope.team.slice)
+                 $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
+            }, 200);    
         } else {
             $scope.team = CookieService.getCookies('team2');
             var teamC = 'team2';
-            $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+            $timeout(function() {
+                 $rootScope.movies2=arraySlice($scope.movies,$scope.team.slice)
+                 $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+            }, 200);
         }
 
         console.log($rootScope.movies1,$rootScope.movies2)
