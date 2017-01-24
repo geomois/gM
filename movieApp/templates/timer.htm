@@ -1,17 +1,22 @@
 <div ng-controller="TimerCtrl">
-      <h1>Movie App</h1>
-      <p>rgryhgrgrghrgrgr</p>
-    </div>
-    {{team.name}}
-    <div style="display:{{count}}">
-      {{counter}}
-    <button ng-click="stop()">Stop</button>    
-     <button ng-click="start()">Start</button> 
-    </div>
-    <div style="display:{{ready}}">
-    <a href="#overview" >	<button ng-click="paused()">Found</button>  
+    <h1>Movie App</h1>
+    <p>rgryhgrgrghrgrgr</p>
+</div>
+{{team.name}}
+<div style="display:{{count}}">
+    {{counter}}
+    <button ng-click="stop()">Stop</button>
+    <button ng-click="start()">Start</button>
+</div>
+<div style="display:{{ready}}">
+    <a href="#overview">
+        <button ng-click="paused()">Found</button>
     </a>
-    <a href="#overview" >
-     <button ng-click="notPassed()">Not</button> 
-   </a>
-    </div>
+    <a href="#overview">
+        <button ng-click="notPassed()">Not</button>
+    </a>
+</div>
+<div class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: {{bar}}%"></div>
+</div>
+</div>

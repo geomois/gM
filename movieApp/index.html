@@ -1,20 +1,23 @@
 <html>
   <head>
-    <title>MovieApp</title>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <title>MovieApp</title> 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
-<script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-route.min.js"></script>
-<script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-cookies.js"></script>
-<script>
-function checkCookie() {
-  var path = window.location.pathname ;
-    if (document.cookie == false) {
-        window.location.href = path+ "#/start";
-    } 
-}
-</script>
+    <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
+    <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-route.min.js"></script>
+    <script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular-cookies.js"></script>
+    <script>
+    function checkCookie() {
+      var path = window.location.pathname ;
+        if (document.cookie == false) {
+            window.location.href = path+ "#/start";
+        } 
+    }
+    </script>
   </head>
   <!-- 3. Display the application -->
   <body onLoad="checkCookie()">

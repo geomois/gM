@@ -1,5 +1,6 @@
 app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
     function($scope, $timeout, CookieService) {
+        $scope.bar = 100;
         $scope.counter = 120;
         $scope.count = '';
         $scope.ready = 'none';
@@ -19,6 +20,7 @@ app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
                 $scope.ready = 'block';
             } else {
                 $scope.counter--;
+                $scope.bar = $scope.counter * 0.833333;
                 mytimeout = $timeout($scope.onTimeout, 1000);
             }
         }
@@ -54,7 +56,7 @@ app.controller('StartCtrl', ['$timeout', '$scope', 'GetMovieData', 'CookieServic
         $timeout(function() {
             $scope.a = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0) // length-4
             $scope.b = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0)
-            console.log($scope.a,$scope.b)
+            console.log($scope.a, $scope.b)
         }, 200)
 
         $scope.team1 = '';
@@ -92,19 +94,23 @@ app.controller('GameCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData', 
             $scope.team = CookieService.getCookies('team1');
             var teamC = 'team1';
             $timeout(function() {
-                 $rootScope.movies1=arraySlice($scope.movies,$scope.team.slice)
-                 $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
-            }, 200);    
+                $rootScope.movies1 = arraySlice($scope.movies, $scope.team.slice)
+                $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
+                $scope.Poster = poster($scope.movie);
+            }, 200);
         } else {
             $scope.team = CookieService.getCookies('team2');
             var teamC = 'team2';
             $timeout(function() {
-                 $rootScope.movies2=arraySlice($scope.movies,$scope.team.slice)
-                 $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+                $rootScope.movies2 = arraySlice($scope.movies, $scope.team.slice)
+                $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+                $scope.Poster = poster($scope.movie);
             }, 200);
         }
 
-        console.log($rootScope.movies1,$rootScope.movies2)
+
+
+        console.log($rootScope.movies1, $rootScope.movies2)
         $scope.updateTeam = function(id) {
             CookieService.teamArray(teamC, id);
         }
@@ -115,7 +121,7 @@ app.controller('OverviewCrtl', ['$scope', '$cookies', 'CookieService', '$rootSco
     function($scope, $cookies, CookieService, $rootScope, GetMovieData, $timeout) {
         $scope.team1 = CookieService.getCookies('team1');
         $scope.team2 = CookieService.getCookies('team2');
-        console.log($scope.team1.slice,$scope.team2.slice)
+        console.log($scope.team1.slice, $scope.team2.slice)
 
         if ($rootScope.movies1 == undefined) {
             GetMovieData.movieData(function(dataResponse) {
@@ -144,4 +150,12 @@ var test = 'fdfdfdf'
 
 function arraySlice(arr, x) {
     return arr.slice(x, (x + 5));
+}
+
+function poster(obj) {
+    if (obj.Poster == 'N/A') {
+        return 'images/IMG_0727.JPG';
+    } else {
+        return obj.Poster;
+    }
 }
