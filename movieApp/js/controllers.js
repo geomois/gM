@@ -87,7 +87,6 @@ app.controller('GameCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData', 
             $scope.movies = dataResponse;
         })
 
-
         var teams = CookieService.getCookies('teamCount');
         if (isEven(teams)) {
             $scope.team = CookieService.getCookies('team1');
