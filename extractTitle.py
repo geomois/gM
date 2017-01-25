@@ -18,7 +18,7 @@ def readFile(path):
     with open(path,'r') as f:
         for line in f:
             try:
-                titles.append(line.split('t')[1])
+                titles.append(line[2:].strip('\n'))
             except:
                 print "error"
     return titles
