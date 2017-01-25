@@ -13,6 +13,16 @@ def fileWalker(directory,file):
     uniqueTitle=np.unique(filesToScrape)
     exportTxt(file,uniqueTitle)
 
+def readFile(path):
+    titles=[]
+    with open(path,'r') as f:
+        for line in f:
+            try:
+                titles.append(line.split('t')[1])
+            except:
+                print "error"
+    return titles
+
 def mergeFiles(file1,file2):
     titles=[]
     with open(file1,'r') as f1:
@@ -47,7 +57,7 @@ def fetchMovieInfo(titleList,exportFile):
     movieList=[]
     for i in xrange(0,len(titleList)):
         result=im.get_movie(titleList[i])
-        # print titleList[i],"Fetched "+str(result)
+        print titleList[i],"Fetched "+str(result)
         if str(result)!='':
            movieList.append(result.data)
         else:
@@ -125,4 +135,6 @@ if __name__ == '__main__':
     elif (sys.argv[1]=="-f"):
         codeList=np.arange(int(sys.argv[3]),6500000)
         fetchMovieInfo(codeList,sys.argv[2])
-        
+    elif (sys.argv[1]=="-r"):
+        titles=readFile(sys.argv[2])
+        fetchMovieInfo(titles,sys.argv[3])
