@@ -57,28 +57,33 @@ def readLst(directory,exportFile):
 def fetchMovieApi(titleList,exportFile):
     movieList=[]
     print "Fetching movies.."
-    Tstart = time.time()
+    start = time.time()
     for i in xrange(0,len(titleList)):
-        start=time.time()
         fetchUrl='http://www.omdbapi.com/?i='+titleList[i]+'&plot=short&r=json'
-        response = urllib2.urlopen(fetchUrl)
-        html=response.read()
-        print str(i) +". "+titleList[i]
-        # cleanedResponse=ast.literal_eval(response.read())
-        # print cleanedResponse
-        movieList.append(html)
+        try:
+            response = urllib2.urlopen(fetchUrl)
+            html=response.read()
+            print str(i) +". "+titleList[i]
+            movieList.append(html)
+        except:
+            print "Some exception occured"
+            print "Waiting.."
+            time.sleep(60)
+            response = urllib2.urlopen(fetchUrl)
+            html=response.read()
+            print str(i) +". "+titleList[i]
+            movieList.append(html)
+            print "Resuming download.."
 
         if (i+1)%5000==0:
             print "Writing at ", str(i)
             exportJson(exportFile+"_"+str(i)+".json",movieList)
             movieList=[]
-            exportTxt(exportFile,movieList)
-            end = time.time()
-            print "5000 in: "+str(end - start)
+            # exportJson(exportFile,movieList)
     
     end = time.time()
-    print "Total time: "+str(Tend - Tstart)
-    exportTxt(exportFile,movieList)
+    exportJson(exportFile+".json",movieList)
+    print "Total time: "+str(end - start)
 
 def fetchMovieInfo(titleList,exportFile):
     im=imdb.IMDb()
