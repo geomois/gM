@@ -1,0 +1,12 @@
+HTTrack3.48-21 launched on Thu, 26 Jan 2017 19:36:59 at http://www.imdb.com/list/ls058011111/ +http://www.imdb.com/name/*
+(httrack -s0 -p0 -#L100000000 http://www.imdb.com/list/ls058011111/ +http://www.imdb.com/name/* -r2 )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+19:39:37	Warning: 	engine: warning: temporary file tmpfile12.tmp already exists
+
+HTTrack Website Copier/3.48-21 mirror complete in 19 minutes 44 seconds : 132 links scanned, 132 files written (26691625 bytes overall) [6680035 bytes received at 5641 bytes/sec], 26691625 bytes transferred using HTTP compression in 132 files, ratio 24%
+(No errors, 1 warnings, 0 messages)

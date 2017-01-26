@@ -1,0 +1,8 @@
+-s0 -p0 -#L100000000 http://www.imdb.com/list/ls058011111/ +http://www.imdb.com/name/* -r2
+File generated automatically on Thu, 26 Jan 2017 19:36:59, do NOT edit
+
+To update a mirror, just launch httrack without any parameters
+The existing cache will be used (and modified)
+To have other options, retype all parameters and launch HTTrack
+To continue an interrupted mirror, just launch httrack without any parameters
+
