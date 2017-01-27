@@ -1,7 +1,0 @@
-Mirror in progress since Thu, 26 Jan 2017 21:35:47 .. please wait!
-httrack -s0 -#L100000000 http://www.imdb.com/list/ls058011111/?start=400 +http://www.imdb.com/name/* -r2 
-To pause the engine: create an empty file named 'hts-stop.lock'
-PID=6463
-UID=1000
-GID=1000
-START=1485462947
