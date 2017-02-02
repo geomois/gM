@@ -70,7 +70,8 @@ def fetchMovieApi(titleList,exportFile):
             movieList=[]
     
     end = time.time()
-    exportJson(exportFile+".json",movieList)
+    if len(movieList)>0:
+        exportJson(exportFile+".json",movieList)
     print "Total time: "+str(end - start)
 
 def multiFetch(threadName):
@@ -181,9 +182,6 @@ def fetchTitles():
     elif len(titles)<=5000:
         part=titles[:len(titles)-1]
         titles=[]
-
-    
-    print part[:3]
     return part
 
 if __name__ == '__main__':
