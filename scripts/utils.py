@@ -1,11 +1,14 @@
 import os
 import sys
 import numpy as np
-import imdb
+# import imdb
 import json
 import urllib2
 import time
-import ast
+import threading
+
+titles=[]
+lock = threading.RLock()
 
 def fileWalker(directory,file):
     filesToScrape=[]
@@ -59,31 +62,43 @@ def fetchMovieApi(titleList,exportFile):
     print "Fetching movies.."
     start = time.time()
     for i in xrange(0,len(titleList)):
-        fetchUrl='http://www.omdbapi.com/?i='+titleList[i]+'&plot=short&r=json'
-        try:
-            response = urllib2.urlopen(fetchUrl)
-            html=response.read()
-            print str(i) +". "+titleList[i]
-            movieList.append(html)
-        except:
-            print "Some exception occured"
-            print "Waiting.."
-            time.sleep(60)
-            response = urllib2.urlopen(fetchUrl)
-            html=response.read()
-            print str(i) +". "+titleList[i]
-            movieList.append(html)
-            print "Resuming download.."
+        movieList.append(apiCall(titleList[i]))
 
         if (i+1)%5000==0:
             print "Writing at ", str(i)
             exportJson(exportFile+"_"+str(i)+".json",movieList)
             movieList=[]
-            # exportJson(exportFile,movieList)
     
     end = time.time()
-    exportJson(exportFile+".json",movieList)
+    if len(movieList)>0:
+        exportJson(exportFile+".json",movieList)
     print "Total time: "+str(end - start)
+
+def multiFetch(threadName):
+    with lock:
+        titleList=fetchTitles()
+    
+    while titleList!=None:
+        fetchMovieApi(titleList,threadName)
+        with lock:
+            titleList=fetchTitles()
+    print threadName," thread ended"
+
+def apiCall(id):
+    fetchUrl='http://www.omdbapi.com/?i='+id+'&plot=short&r=json'
+    try:
+        response = urllib2.urlopen(fetchUrl)
+        html=response.read()
+        # print str(i) +". "+titleList[i]
+    except:
+        print "Some exception occured"
+        print "Waiting.."
+        time.sleep(60)
+        response = urllib2.urlopen(fetchUrl)
+        html=response.read()
+        print str(i) +". "+id
+        print "Resuming download.."
+    return html
 
 def fetchMovieInfo(titleList,exportFile):
     im=imdb.IMDb()
@@ -144,6 +159,8 @@ def exportJson(exportFile,movies):
     if not os.path.isfile(exportFile):
         f=open(exportFile,"w+")
         f.close()
+    elif os.path.exists(exportFile):#maybe add something later
+        pass
 
     with open(exportFile,'a+') as f:
         for movie in movies:
@@ -153,6 +170,19 @@ def exportJson(exportFile,movies):
             f.write('\n')
 
     print count,"titles written in", exportFile
+
+def fetchTitles():
+    global titles
+    part=[]
+    if len(titles)==0:
+        return None
+    if len(titles)>5000:
+        part=titles[:5000]
+        del titles[:5000]
+    elif len(titles)<=5000:
+        part=titles[:len(titles)-1]
+        titles=[]
+    return part
 
 if __name__ == '__main__':
     reload(sys)
@@ -172,3 +202,14 @@ if __name__ == '__main__':
     elif (sys.argv[1]=="-r"):
         titles=readFile(sys.argv[2])
         fetchMovieApi(titles,sys.argv[3])
+    elif (sys.argv[1]=="-mr"):
+        titles=readFile(sys.argv[2])
+        threadCount=int(sys.argv[3])
+        print 
+        for i in xrange(1,threadCount+1):
+            print "thread "+str(i)+" initialized"
+            t=threading.Thread(target=multiFetch,args=("t"+str(i),))
+            t.setDaemon(True)
+            t.start()
+        while threading.active_count() > 0:
+            time.sleep(0.1)
