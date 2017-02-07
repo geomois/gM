@@ -1,22 +1,17 @@
-app.service('GetMovieData', ['$http', function($http) {
+app.service('GetMovieData', ['$http','$q', function($http,$q) {
     this.movieData = function(callbackFunc) {
-        $http.get('../data.json').
+        $http.get('../movieData/data/data.cgi').
         success(function(data) {
             var data = angular.fromJson(data);
-            console.log(data)
-            /*var data = [];
-            for (var i = 0; i < adata.movies.length; i++) {
-                data.push(adata.movies[i]);
-            }*/
+           
             // console.log(data); 
-            callbackFunc(data);
+            return callbackFunc(data);
             // or depends what you need testArr[0] = data.images;
         }).
         error(function(data) {
             console.log('fffff'); // log error
         });
     }
-
 }]);
 
 app.service('CookieService', ['$cookies', function($cookies) {

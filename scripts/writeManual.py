@@ -20,14 +20,12 @@ def exportTxt(exportFile,titleList):
 
     print count,"titles written in", exportFile
 
-filename=('name.lst')
+filename=('titleIds.txt')
 titles=[]
 with open(filename, 'r') as listFile:
     for line in listFile:
-        fooArray = line.split("/")
-        if fooArray[1] == "name":
-            titles.append(fooArray[2][:9])
+        titles.append(line.strip('tt'))
 
 uniqueTitle=np.unique(titles)
-exportTxt('names.txt',uniqueTitle)
+exportTxt('clearIds.txt',uniqueTitle)
 

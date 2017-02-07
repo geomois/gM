@@ -1,14 +1,18 @@
-<div ng-controller="OverviewCrtl">
-  <div>
-    {{team1.name}}: {{team1.score}}
+<div ng-controller="OverviewCrtl" class="row" >
+  <div class="col-sm-12 col-xs-12">
+    <h3>Round-{{team1.movies.length}}</h3>
   </div>
-  <div>
-    {{team2.name}}: {{team2.score}}
+  <div class="col-sm-6 col-xs-6"> 
+    <h2>{{team1.name}}</h2>
+    <h3>{{team1.score}}</h3>
   </div>
-  <div>
-    Round: {{team1.movies.length}}
+   <div class="col-sm-6 col-xs-6">
+    <h2>{{team2.name}}</h2> 
+    <h3>{{team2.score}}</h3>
   </div>
-  <a href="#game">
-  <button>Next</button>
-  </a>
+  <div class="col-sm-12 col-xs-12">
+    <a href="#game">
+      <button type="button" class="btn btn-default" >Next</button>
+    </a>
+  </div>
 </div>

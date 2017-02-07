@@ -14,7 +14,7 @@ app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
         }
 
         $scope.onTimeout = function() {
-            if ($scope.counter < 118) {
+            if ($scope.counter < 80) {
                 $timeout.cancel(mytimeout);
                 $scope.count = 'none';
                 $scope.ready = 'block';
@@ -46,18 +46,8 @@ app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
 ]);
 
 
-app.controller('StartCtrl', ['$timeout', '$scope', 'GetMovieData', 'CookieService',
-    function($timeout, $scope, GetMovieData, CookieService) {
-        GetMovieData.movieData(function(dataResponse) {
-            $scope.movies = dataResponse;
-        })
-
-
-        $timeout(function() {
-            $scope.a = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0) // length-4
-            $scope.b = Math.floor((Math.random() * ($scope.movies.length - 4)) + 0)
-            console.log($scope.a, $scope.b)
-        }, 200)
+app.controller('StartCtrl', ['$scope', 'CookieService',
+    function($scope, CookieService) {
 
         $scope.team1 = '';
         $scope.team2 = '';
@@ -78,42 +68,48 @@ app.controller('StartCtrl', ['$timeout', '$scope', 'GetMovieData', 'CookieServic
             CookieService.setCookies(team_1, team_2, teamCount);
             // CookieService.getCookies($cookies.team1);
         }
-
-
     }
 ]);
 
 app.controller('GameCtrl', ['$timeout', '$scope', '$rootScope', 'GetMovieData', 'CookieService', 'GameService',
     function($timeout, $scope, $rootScope, GetMovieData, CookieService, GameService) {
-        GetMovieData.movieData(function(dataResponse) {
-            $scope.movies = dataResponse;
-        })
 
         var teams = CookieService.getCookies('teamCount');
-        if (isEven(teams)) {
-            $scope.team = CookieService.getCookies('team1');
-            var teamC = 'team1';
-            $timeout(function() {
-                $rootScope.movies1 = arraySlice($scope.movies, $scope.team.slice)
-                $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
-                $scope.Poster = poster($scope.movie);
-            }, 200);
-        } else {
-            $scope.team = CookieService.getCookies('team2');
-            var teamC = 'team2';
-            $timeout(function() {
-                $rootScope.movies2 = arraySlice($scope.movies, $scope.team.slice)
-                $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
-                $scope.Poster = poster($scope.movie);
-            }, 200);
+        if (!$rootScope.movies1 && !$rootScope.movies2) {
+            GetMovieData.movieData(function(dataResponse) {
+                //$scope.movies = dataResponse;
+                $rootScope.movies1 = dataResponse.slice(0, 20)
+                $rootScope.movies2 = dataResponse.slice(20, dataResponse.length)
+
+
+                if (isEven(teams)) {
+                    $scope.team = CookieService.getCookies('team1');
+                    $scope.teamC = 'team1';
+                    $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
+                } else {
+                    $scope.team = CookieService.getCookies('team2');
+                    $scope.teamC = 'team2';
+                    $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+                }
+
+                console.log($rootScope.movies1, $rootScope.movies2)
+                
+            });
+        }else{
+            if (isEven(teams)) {
+                    $scope.team = CookieService.getCookies('team1');
+                    $scope.teamC = 'team1';
+                    $scope.movie = GameService.game($scope.team.movies, $rootScope.movies1);
+                } else {
+                    $scope.team = CookieService.getCookies('team2');
+                    $scope.teamC = 'team2';
+                    $scope.movie = GameService.game($scope.team.movies, $rootScope.movies2);
+                }
         }
+     $scope.updateTeam = function(id) {
+                    CookieService.teamArray($scope.teamC, id);
+            }
 
-
-
-        console.log($rootScope.movies1, $rootScope.movies2)
-        $scope.updateTeam = function(id) {
-            CookieService.teamArray(teamC, id);
-        }
     }
 ]);
 
@@ -121,23 +117,14 @@ app.controller('OverviewCrtl', ['$scope', '$cookies', 'CookieService', '$rootSco
     function($scope, $cookies, CookieService, $rootScope, GetMovieData, $timeout) {
         $scope.team1 = CookieService.getCookies('team1');
         $scope.team2 = CookieService.getCookies('team2');
-        console.log($scope.team1.slice, $scope.team2.slice)
 
-        if ($rootScope.movies1 == undefined) {
+        if (!$rootScope.movies1 && !$rootScope.movies2) {
             GetMovieData.movieData(function(dataResponse) {
-                $scope.moviesResponce = dataResponse;
-            })
-            $timeout(function() {
-                $rootScope.movies1 = arraySlice($scope.moviesResponce, $scope.team1.slice)
-            }, 200)
-        }
-        if ($rootScope.movies2 == undefined) {
-            GetMovieData.movieData(function(dataResponse) {
-                $scope.moviesResponce = dataResponse;
-            })
-            $timeout(function() {
-                $rootScope.movies2 = arraySlice($scope.moviesResponce, $scope.team2.slice)
-            }, 200)
+                //$scope.movies = dataResponse;
+                $rootScope.movies1 = dataResponse.slice(0, 20)
+                $rootScope.movies2 = dataResponse.slice(20, dataResponse.length)
+            });
+
         }
     }
 ]);
@@ -150,12 +137,4 @@ var test = 'fdfdfdf'
 
 function arraySlice(arr, x) {
     return arr.slice(x, (x + 5));
-}
-
-function poster(obj) {
-    if (obj.Poster == 'N/A') {
-        return 'images/IMG_0727.JPG';
-    } else {
-        return obj.Poster;
-    }
 }

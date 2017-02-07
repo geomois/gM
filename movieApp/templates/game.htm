@@ -1,8 +1,23 @@
-<div ng-controller="GameCtrl">
-  <h1>{{team.name}}LLLk</h1>
-  Movie:<span>{{movie.Title}}<br>{{xx}}</span><br>
-  <img src="{{Poster}}" alt="movie-poster"/>
- <a href="#time" >
- 	<input ng-click="updateTeam(movie.imdbID)" type="button" value="ready">
- </a>
+<div ng-controller="GameCtrl" class="row">
+    <div class="col-sm-6 col-xs-6">
+        <h4>Team:</h4>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+        <h4>{{team.name}}</h4>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+        <h3>Movie:</h3>
+    </div>
+    <div class="col-sm-6 col-xs-6">
+        <h3>{{movie.Title}}</h3>
+    </div>
+    <div class="col-sm-12 col-xs-12">
+        <img src="{{movie.Poster}}" alt="movie-poster" />
+    </div>
+    <div class="col-sm-12 col-xs-12" style="padding: 10px;">
+        <a href="#time">
+            <button ng-click="updateTeam(movie.imdbID)" class="btn btn-default" type="button">Ready
+            </button>
+        </a>
+    </div>
 </div>

@@ -1,11 +1,15 @@
-<div ng-controller="StartCtrl">
-      <h1>Movie App</h1>
+<div ng-controller="StartCtrl" class="row">
+    <div class="col-sm-12 col-xs-12"> Team1 </div>
+    <div class="col-sm-12 col-xs-12">
+        <input type="text" name="team1" ng-model="team1">
     </div>
-    <div>
-      <form >
-        Team1:<input type="text" name="team1" ng-model="team1"><br>
-        Team2:<input type="text" name="team2" ng-model="team2">
-      </form>
-    <a href="#game" ><input type="button" ng-click="save()" value="save"></a>
+    <div class="col-sm-12 col-xs-12"> Team2 </div>
+    <div class="col-sm-12 col-xs-12">
+        <input type="text" name="team2" ng-model="team2">
     </div>
-    <span >{{name1}}</span>
+    <div class="col-sm-12 col-xs-12" style="padding: 10px;">
+      <a href="#game">
+        <button type="button" class="btn btn-default" ng-click="save()" >Save</button>
+      </a>
+    </div>
+</div>

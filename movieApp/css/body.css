@@ -1,0 +1,49 @@
+body {
+    text-align: center;
+    background: url('../images/background.jpg') no-repeat top center fixed;
+    -webkit-background: url('../images/background.jpg') no-repeat top center fixed;
+    -o-background: url('../images/background.jpg') no-repeat top center fixed;
+    -moz-background: url('../images/background.jpg') no-repeat top center fixed;
+    color: #f9b459;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.vertical {
+    display: inline-block;
+    background-color: transparent;
+    -webkit-transform: rotate(90deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+
+.inside {
+    -webkit-transform: rotate(-90deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(-90deg);
+    position: relative;
+    color: coral;
+    font-size: -webkit-xxx-large;
+    float: right;
+    top: 50%;
+}
+
+.outside {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.no-translate {
+    -webkit-transform: none;
+    -moz-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+}
