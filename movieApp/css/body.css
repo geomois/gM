@@ -1,49 +1,82 @@
+.end{
+    background: url('../images/background.jpg') center center  no-repeat transparent;
+    -webkit-background: url('../images/background.jpg') center center  no-repeat transparent;
+    -o-background: url('../images/background.jpg') center center  no-repeat transparent;
+    -moz-background: url('../images/background.jpg') center center  no-repeat transparent;
+        height: 100%;
+   background-size: 100% 99%; 
+   height: 100%;  
+   margin: 10px
+}
+
+.start {
+    background: url('../images/background.jpg') center center  no-repeat transparent;
+    -webkit-background: url('../images/background.jpg') center center  no-repeat transparent;
+    -o-background: url('../images/background.jpg') center center  no-repeat transparent;
+    -moz-background: url('../images/background.jpg') center center  no-repeat transparent;
+        height: 100%;
+   background-size: 100% 99%; 
+   height: 100%;  
+   margin: 10px
+}
 body {
     text-align: center;
-    background: url('../images/background.jpg') no-repeat top center fixed;
-    -webkit-background: url('../images/background.jpg') no-repeat top center fixed;
-    -o-background: url('../images/background.jpg') no-repeat top center fixed;
-    -moz-background: url('../images/background.jpg') no-repeat top center fixed;
-    color: #f9b459;
+    background: #ff892e  no-repeat top center fixed;
+    -webkit-background: #ff892e  no-repeat top center fixed;
+    -o-background: #ff892e  no-repeat top center fixed;
+    -moz-background: #ff892e  no-repeat top center fixed;
+    color: #fff;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
     -moz-background-size: cover;
     margin: 0;
-    padding: 0;
+    padding-top: 100px;
     height: 100%;
     width: 100%;
 }
 
-.vertical {
-    display: inline-block;
-    background-color: transparent;
-    -webkit-transform: rotate(90deg);
-    /* Chrome, Safari, Opera */
-    transform: rotate(90deg);
+.input-team{
+    color: #3d414c;
+    letter-spacing: 1px;
+    font-family: arial;
+}
+
+.head-img{
+    position: absolute;
+    height: 80px;
+    float: left;
+    left: 5px;
+}
+
+.head{
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 2px 6px 0p;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+    background-color: #7b2eff;
+    padding-top: 6px;
+    position: fixed;
+    top:0px;
+    width: 100%;
+    height: 90px;
+    z-index: 99;
+}
+
+.none{
+    display:none
+}
+
+.winner{
+position: relative;
+    top: 65px;
+    left: 30px;
+    text-align: -webkit-left;
 }
 
 .inside {
-    -webkit-transform: rotate(-90deg);
-    /* Chrome, Safari, Opera */
-    transform: rotate(-90deg);
     position: relative;
     color: coral;
     font-size: -webkit-xxx-large;
     float: right;
     top: 50%;
-}
-
-.outside {
-    position: relative;
-    height: 100%;
-    width: 100%;
-}
-
-.no-translate {
-    -webkit-transform: none;
-    -moz-transform: none;
-    -ms-transform: none;
-    -o-transform: none;
-    transform: none;
 }
