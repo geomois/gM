@@ -14,7 +14,7 @@ app.controller('TimerCtrl', ['$scope', '$timeout', 'CookieService',
         }
 
         $scope.onTimeout = function () {
-            if ($scope.counter < 80) {
+            if ($scope.counter < 0.5) {
                 $timeout.cancel(mytimeout);
                 $scope.count = 'none';
                 $scope.ready = 'block';
@@ -50,20 +50,9 @@ app.controller('StartCtrl', ['$scope', '$rootScope', 'CookieService', 'GetMovieD
     function ($scope, $rootScope, CookieService, GetMovieData) {
 
         GetMovieData.movieData(function (dataResponse) {
-            //$scope.movies = dataResponse;
+            console.log(dataResponse)
             $rootScope.movies1 = dataResponse.slice(0, 20)
             $rootScope.movies2 = dataResponse.slice(20, dataResponse.length)
-            $rootScope.genres = [
-                "Thriller", "Horror",
-                "Biography", "History",
-                "Sci-Fi", "Fantasy",
-                "Crime", "Drama", /*POSTER*/
-                "Musical", "Music",
-                "Romance", "Film-Noir",/*POSTER*/
-                "Mystery", "Action", "Adventure", "Western", "War",
-                "Sport",/*POSTER*/
-                "Family", "Animation", "Comedy"];
-
         });
         $rootScope.poster = {
             "horror": "scary.png",
@@ -76,6 +65,18 @@ app.controller('StartCtrl', ['$scope', '$rootScope', 'CookieService', 'GetMovieD
             "noirRomance":"romance.png",
             "sport":"sport.png"
         }
+
+        $rootScope.genres = [
+                "Thriller", "Horror",
+                "Biography", "History",
+                "Sci-Fi", "Fantasy",
+                "Crime", "Drama", 
+                "Musical", "Music",
+                "Romance", "Film-Noir",
+                "Mystery", "Action", "Adventure", "Western", "War",
+                "Sport",
+                "Family", "Animation", "Comedy"];
+                
 
         $scope.team1 = '';
         $scope.team2 = '';
@@ -114,7 +115,6 @@ app.controller('GameCtrl', ['$timeout', '$scope', '$rootScope', 'CookieService',
         }
         
         var genre = $scope.movie.Genre;
-        console.log(genre)
         switchGendre($rootScope.genres, genre, function (data) {
             $scope.src = switchRes(data, $rootScope.genres, $rootScope.poster);
         });
@@ -133,14 +133,14 @@ app.controller('OverviewCrtl', ['$scope', '$cookies', 'CookieService', '$rootSco
         $scope.team1 = CookieService.getCookies('team1');
         $scope.team2 = CookieService.getCookies('team2');
         
-        $scope.displayRound = $scope.team2.movies.length+1 > 20 ? 'none' : null
-        $scope.display = $scope.team2.movies.length+1 > 20 ? null : 'none'
+        $scope.displayRound = $scope.team2.movies.length+1 > 10 ? 'none' : null
+        $scope.display = $scope.team2.movies.length+1 > 10 ? null : 'none'
         if ($scope.display===null){
             console.log($scope.team1.score,$scope.team2.score)
             if ($scope.team1.score == $scope.team2.score){
                 $scope.winner = 'DrAw'
             }else{
-                $scope.winner = $scope.team1.score > $scope.team2.score ? $scope.team1.name : $scope.team2.score
+                $scope.winner = $scope.team1.score > $scope.team2.score ? $scope.team1.name : $scope.team2.name
             }
         }
         if (!$rootScope.movies1 && !$rootScope.movies2) {
@@ -188,7 +188,6 @@ function arraySlice(arr, x) {
 function switchGendre(array, str, callbackFunc) {
     for (i in array) {
         if (str.search(array[i]) > -1) {
-            console.log(str.search(array[i]))
             var res = array[i];
             break;
         }
@@ -197,39 +196,31 @@ function switchGendre(array, str, callbackFunc) {
 }
 
 function switchRes(res, array, posj) {
-    console.log(posj.crimeDrama)
-    console.log(res)
     var poster = 'dead-Oscar.png'
     switch (res) {
         case array[0]:
         case array[1]:
             poster = posj.horror
-            console.log('hor')
             break
         case array[2]:
         case array[3]:
             poster = posj.history
-            console.log('his')
             break
         case array[4]:
         case array[5]:
             poster = posj.fantasy
-            console.log('fant')
             break
         case array[6]:
         case array[7]:
             poster = posj.crimeDrama
-            console.log('crime')
             break
         case array[8]:
         case array[9]:
             poster = posj.music
-            console.log('mus')
             break
         case array[10]:
         case array[11]:
             poster = posj.noirRomance
-            console.log('romance')
             break
         case array[12]:
         case array[13]:
@@ -237,17 +228,14 @@ function switchRes(res, array, posj) {
         case array[15]:
         case array[16]:
             poster = posj.action
-            console.log('act')
             break
         case array[17]:
             poster = posj.sport
-            console.log('sprt')
             break
         case array[18]:
         case array[19]:
         case array[20]:
             poster = posj.family
-            console.log('f')
             break
         default:
             poster 

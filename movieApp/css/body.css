@@ -21,11 +21,11 @@
 }
 body {
     text-align: center;
-    background: #ff892e  no-repeat top center fixed;
-    -webkit-background: #ff892e  no-repeat top center fixed;
-    -o-background: #ff892e  no-repeat top center fixed;
-    -moz-background: #ff892e  no-repeat top center fixed;
-    color: #fff;
+    background: #691bb3  no-repeat top center fixed;
+    -webkit-background: #691bb3  no-repeat top center fixed;
+    -o-background: #691bb3  no-repeat top center fixed;
+    -moz-background: #691bb3  no-repeat top center fixed;
+    color:  #6abf1b;;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -53,7 +53,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.8) 0px 2px 6px 0p;
     padding-bottom: 6px;
     border-bottom: 1px solid #eee;
-    background-color: #7b2eff;
+    background-color: #bf441b;
     padding-top: 6px;
     position: fixed;
     top:0px;
@@ -62,21 +62,30 @@ body {
     z-index: 99;
 }
 
+.margins{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
 .none{
     display:none
 }
 
 .winner{
-position: relative;
+    position: relative;
     top: 65px;
     left: 30px;
     text-align: -webkit-left;
 }
 
 .inside {
-    position: relative;
-    color: coral;
+    position: absolute;
+    color: #231d1a;
     font-size: -webkit-xxx-large;
-    float: right;
-    top: 50%;
+    top: 10%;
+    right: 42.5%;
+}
+
+.white {
+    color: #fff;
 }

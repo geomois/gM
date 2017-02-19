@@ -8,7 +8,7 @@ posterIds=[]
 with open('data.json') as data_file:
     data = json.load(data_file)
     for m in data:
-        if m['Poster']!='N/A':
+        if m['Plot']!='N/A':
             posterIds.append(m)
             print m['imdbID']
 

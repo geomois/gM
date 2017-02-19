@@ -1,16 +1,16 @@
 <div ng-controller="OverviewCrtl" style="margin-top:-10px " class="container" >
   <div class="row {{displayRound}}">
     <div class="col-sm-12 col-xs-12">
-      <h3>Round-{{team1.movies.length}}</h3>
+      <h3 class="white" >Round-{{team1.movies.length}}</h3>
     </div>
 
   <div class="col-sm-6 col-xs-6"> 
     <h2>{{team1.name}}</h2>
-    <h3>{{team1.score}}</h3>
+    <h3 class="white" >{{team1.score}}</h3>
   </div>
    <div class="col-sm-6 col-xs-6">
     <h2>{{team2.name}}</h2> 
-    <h3>{{team2.score}}</h3>
+    <h3 class="white" >{{team2.score}}</h3>
   </div>
 
   <div class="col-sm-12 col-xs-12">
@@ -20,14 +20,15 @@
   </div>
 </div>
 
-  <div class="end {{display}}" >
+  <div class="{{display}}" >
       <div style="padding-top: 20px">
-      <h3 >  And the winner is: </h3>
+      <h3 class="white" >  And the winner is: </h3>
         <h1 class="winner">{{winner}}</h1>
         <p> {{team1.score}} {{team2.score}} </p>
-        <a href="#start" style="position: relative;top: 100px">
-      <button type="button" class="btn btn-default" >New Game</button>
-    </a>
+        <img style="width: 300px" src="images/Ryan-Reynold-Deadpool-PNG.png" alt="winner" />
+        <a href="#start" style="position: relative;top: 50px">
+          <button type="button" class="btn btn-default" >New Game</button>
+        </a>
       </div>
   </div>
 
