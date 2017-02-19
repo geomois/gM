@@ -50,7 +50,7 @@ body {
 }
 
 .head{
-    box-shadow: rgba(0, 0, 0, 0.8) 0px 2px 6px 0p;
+    box-shadow: rgba(0, 0, 0, 0.8) 2px 2px 6px 0px;
     padding-bottom: 6px;
     border-bottom: 1px solid #eee;
     background-color: #bf441b;
